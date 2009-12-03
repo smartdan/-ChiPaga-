@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>  
+<head>  
+	<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />  
+</head>  
+	<body>  
+	<h1>Ciao <%=h @user.account.name %> <%= @user.account.surname %></h1>  
+	<h2>Dare/Avere</h2>
+	  <p>La spesa totale del mese corrente &egrave; di <%=  @spesa_tot %> &euro;
+	  <h3>Saldo inquilini</h3>
+	  <ul>
+	    <%  @house.users.each do |inq| %>
+	      <li><strong><%= inq.login %></strong> ha speso <%= @inquilini_spesa[inq].to_s %> &euro;. Il suo saldo mensile è <strong><%=  (@inquilini_spesa[inq] - (@spesa_tot / @house.users.length)).round(2) %> &euro;</strong></li>
+	    <% end %>
+	  </ul>
+	<h2>Note</h2>
+	<p><%= @text %> </p>
+	<h2>Visualizza nel sito</h2>
+	Visita questo link <%= @url %>
+	</body> 
+</html>

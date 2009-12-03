@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  user: 
+  name: MyString
+  surname: MyText
+  money: 9.99
+  notes: MyText
+
+two:
+  user: 
+  name: MyString
+  surname: MyText
+  money: 9.99
+  notes: MyText

@@ -1,0 +1,25 @@
+<h2 class="title">Lista delle case </h2>
+<p class="meta">Tutte le case del sistema in cui vive <%=  current_user.login %></p>
+<div class="entry">
+<table CELLPADDING="5" BGCOLOR = "whitesmoke">
+  <tr>
+    <td valign = 'baseline'><h3>Nome</h3></td>
+    <td valign = 'baseline' align = 'center'><h3>Luogo</h3></td>
+  </tr>
+<% @houses.each do |house| %>
+  <tr>
+    <td><%=h house.name %></td>
+    <td><%=h house.place %></td>
+    <td><%= link_to 'Mostra', house %></td>
+    <td><%= link_to 'Modifica', edit_house_path(house) %></td>
+    <td><%= link_to 'Elimina', house, :confirm => 'Sei sicuro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+
+
+<br />
+
+<%= link_to 'Aggiungi nuova casa', new_house_path %>
+</div>

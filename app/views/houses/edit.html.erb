@@ -1,0 +1,25 @@
+<h2 class="title">Modifica casa  <%=h @house.name %></h2>
+<p class="meta"></p>
+<div class="entry">
+<% form_for(@house) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label 'Nome',:name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label 'Luogo', :place %><br />
+    <%= f.text_field :place %>
+  </p>
+  <p>
+    <%= f.hidden_field :creator_id %>
+  </p>
+  <p>
+    <%= f.submit 'Aggiorna casa' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @house %> |
+<%= link_to 'Back', houses_path %>
+</div>

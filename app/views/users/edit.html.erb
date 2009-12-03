@@ -1,0 +1,48 @@
+<h2 class="title">Modifica Utente</h2>
+<p class="meta"></p>
+<% form_for(@user) do |f| %>
+  <%= f.error_messages %>
+
+<p><label for="login">Login</label><br/>
+<%= f.text_field :login %></p>
+
+<p><label for="is_admin">Admin</label><br/>
+<%= f.text_field :is_admin %></p>
+
+<p><label for="email">Email</label><br/>
+<%= f.text_field :email %></p>
+
+<p><label for="activation_code">Codice di Attivazione</label><br/>
+<%= f.text_field :activation_code %></p>
+
+<p><label for="activated_at">Data di Attivazione</label><br/>
+<%= f.date_select :activated_at %></p>
+
+<p><label for="password">Password</label><br/>
+<%= f.password_field :password %></p>
+
+<p><label for="password_confirmation">Ripeti Password</label><br/>
+<%= f.password_field :password_confirmation %></p>
+
+	 <% f.fields_for :account do |account_form| %>
+   	 <p>
+          <%= account_form.hidden_field :money %>
+
+	  <%= account_form.label :name, 'Nome' %><br/>
+          <%= account_form.text_field :name %><br/>
+
+	  <%= account_form.label :surname, 'Cognome' %><br/>
+          <%= account_form.text_field :surname %><br/>
+
+	  <%= account_form.label :notes, 'Note' %><br/>
+          <%= account_form.text_area :notes %><br/>
+ 	 </p>
+
+  <% end %>
+
+<p><%= f.submit 'Salva' %></p>
+<% end %>
+
+<%= link_to 'Mostra', @user %> |
+<%= link_to 'Indietro', users_path %>
+

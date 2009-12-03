@@ -1,0 +1,33 @@
+<h2 class="title">Attivit&agrave: <%=  @activity.name %> in casa <%=  @activity.house.name %></h2>
+<p class="meta">Dettagli attitivit&agrave;</p>
+
+<div class="entry">
+  <h2><%=h @activity.description %></h2>
+<br>
+<p>
+  <b>Costo:</b>
+  <%=h @activity.cost %> &euro;
+</p>
+
+<p>
+  <b>Fine attivit&agrave:</b>
+  <%=h @activity.expiration %>
+</p>
+
+<p>
+  <b>Durata:</b>
+  <%=h @activity.duration %> ore.
+</p>
+
+<p>
+  <% if @activity.done == 0 %>
+	<p>L'attivit&agrave; &egrave; ancora in corso. <%= link_to 'Concludi attivit&agrave;', :action => 'concludi', :id => @activity.id %></p>
+	<% else %>
+	<p>L'attivit&agrave; &egrave; conclusa</p>
+	<% end %>
+</p>
+
+<%= link_to 'Modifica', edit_activity_path(@activity) %> |
+<%= link_to 'Indietro', activities_path %>
+
+</div>

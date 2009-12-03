@@ -1,0 +1,25 @@
+<h2 class="title">Nuova attivit&agrave per la casa <%= @house.name %></h2>
+<p class="meta">Creazione attivit&agrave; per l'utente <%=  @user.login %> e per la casa <%= @house.name %></p>
+<div class="entry">
+<% form_tag :action => "create_for_user", :house_id => @house.id, :user_id => @user.id do  %>
+ <h4><%= label_tag "Nome attività" %></h4>
+ <%= text_field_tag :name %>
+ <br>
+ <h4><%= label_tag "Descrizione" %></h4>   
+ <%= text_area_tag :description, nil, :size => "70x10" %>
+ <br/>
+ <h4><%= label_tag "Costo" %></h4>  
+ <%= text_field_tag :cost %>
+ <br/>
+ <h4><%= label_tag "Durata" %></h4>    
+ <%= text_field_tag :duration %> in ore di lavoro
+ <br/>
+ <h4><%= label_tag "Scadenza" %></h4>  
+ <%= date_select("date_expiration","expiration") %>
+ <br/>	<br/>
+  <%= submit_tag 'Crea' %>
+<% end %>
+<br/>
+<%= link_to 'Indietro', activities_path %>
+
+</div>

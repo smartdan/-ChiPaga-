@@ -1,0 +1,22 @@
+<h2 class="title">Contatti e comunicazioni</h2>
+<p class="meta">Pagina dei contatti e delle comunicazione all'amministratore</p>
+<div class="entry">
+  <h2>Scrivi una comunicazione </h2>
+  <% form_tag :action => "invia_comunicazione" do %>
+  <%= text_area_tag :body, nil, :size => "70x10" %>
+  <br/>
+  <br/>
+  <%= submit_tag 'Invia comunicazione' %>
+  </p>
+  <% end %>
+    <br/>
+<!--
+    <h2>Sostieni il sito con una donazione</h2>
+    <br/>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+    <input type="hidden" name="cmd" value="_s-xclick">
+    <input type="hidden" name="hosted_button_id" value="8822136">
+    <input type="image" src="https://www.paypal.com/it_IT/IT/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - Il sistema di pagamento online più facile e sicuro!">
+    <img alt="" border="0" src="https://www.paypal.com/it_IT/i/scr/pixel.gif" width="1" height="1">
+    </form>-->
+</div>

@@ -1,0 +1,27 @@
+<h2 class="title">Utenti </h2>
+<p class="meta">lista di tutti gli utenti del sistema</p>
+<div class="entry">
+<table CELLPADDING="5" BGCOLOR = "whitesmoke">
+  <tr>
+    <td valign = 'baseline'><h4>Login</h4></td>
+    <td valign = 'baseline'><h4>Email</h4></td>
+	  <td valign = 'baseline'><h4>Nome</h4></td>
+	  <td valign = 'baseline'><h4>Cognome</h4></td>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%=h user.login %></td>
+    <td><%=h user.email %></td>	
+	<td><%=h user.account.name %></td>
+	<td><%=h user.account.surname %></td>
+    <td><%= link_to 'Mostra', user.account %></td>
+    <td><%= link_to 'Modifica', edit_user_path(user) %></td>
+    <td><%= link_to 'Elimina', user, :confirm => 'Sei sicuro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+
+<%= link_to 'Nuovo Utente', new_user_path %>
+</div>

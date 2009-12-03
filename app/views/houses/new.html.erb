@@ -1,0 +1,25 @@
+<h2 class="title">Creazione nuova casa</h2>
+<p class="meta"></p>
+<div class="entry">
+
+<% form_for(@house) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :name, 'Nome'%><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :place, 'Luogo' %><br />
+    <%= f.text_field :place %>
+  </p>
+  <p>
+    <%= f.hidden_field :creator_id %>
+  </p>
+  <p>
+    <%= f.submit 'Crea nuova casa' %>
+  </p>
+<% end %>
+
+<%= link_to 'Indietro', houses_path %>
+</div>

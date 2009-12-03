@@ -1,0 +1,61 @@
+<%= javascript_include_tag :defaults %> 
+<%= javascript_include_tag 'prototype' %>
+
+<h2 class="title">Casa  <%=h @house.name %></h2>
+<p class="meta">Dettagli casa</p>
+<div class="entry">
+	<p>
+		Questa casa si trova a  <%=h @house.place %>. Ha <%= @inquilini.length.to_s %> inquilini.
+		Il responsabile della casa &egrave;  <%=h @creator.login %>
+	</p>
+	<% if @house.creator_id == current_user.id %>
+		<%= link_to 'Modifica', edit_house_path(@house) %> | <%= link_to 'Elimina casa', @house, :confirm => 'Sei sicuro?', :method => :delete %> |
+	<% end %>
+
+	<%= link_to 'Indietro', houses_path %> | <%= link_to 'Elimina domicilio', :action => 'esci_da_casa', :id => @house.id %>
+	<br>
+	<% if @house.users.include?(current_user) %>  
+	<br/><br/>
+	<h2>Spese ultimi 30 giorni</h2>
+	<ul>
+		<% if @house.activities.length > 0 %>
+			<% @house.activities.each do |act| %>
+				<% if act.created_at.year == Time.now.year %>
+					<% if (act.created_at >= (1.month.ago)) and (act.done == 0) %>
+					<li><strong><%= link_to  act.name, act %></strong> - Costo: <%= act.cost.round(2) %> &euro; - Utente: <%= act.user.login %>   </li>
+					<% end %>
+				<% end %>
+			<% end %>
+		<% else %>
+			<li>Nessuna spesa inserita</li>
+		<% end %>
+	</ul>
+	<h2>Crea attivit&agrave;</h2>
+	<% form_tag :controller => 'activities', :action => "new_for_user" , :id => @house.id do %>
+	<strong>Seleziona inquilino</strong> <%= select("user", "id", @inquilini.map {|u| [u.login, u.id]}) %>
+	<%= submit_tag 'Crea attivit&agrave;' %>
+	<% end %>
+	<br/>
+	<h2>Dare/Avere ultimi 30 giorni</h2>
+	<p> La spesa totale del mese <%= Date.today.month %>/<%= Date.today.year %> &egrave; stata di <%=  @spesa_tot %> &euro;</p>
+	<h2>Saldo inquilini</h2>
+	<p>
+		<ul>
+			<%  @inquilini.each do |inq| %>
+			<li><strong><%= inq.login %></strong> ha speso <%= @inquilini_spesa[inq].to_s %> &euro;. Il suo saldo mensile è <strong><%= (@inquilini_spesa[inq]  - (@spesa_tot / @inquilini.length)).round(2) %> &euro;</strong></li>
+			<% end %>
+		</ul>
+	</p>
+	<br/>
+	<p class="meta"></p>
+	<h2>Notifica di chiusura spese mensili</h2>
+	<p>Invia <%= link_to 'notifica di chiusura', :action => 'notifica_chiusura', :id => @house.id %> spese mensili.</p>
+	
+	<% else %>
+	<br/>
+	<br/>
+		<h2>Diventa inquilino</h2>
+		<br/>
+		<%= link_to 'Partecipa', :action => 'partecipa' , :id => @house.id %> alla vita di questa casa.
+	<% end %>
+</div>

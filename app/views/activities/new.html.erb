@@ -1,0 +1,29 @@
+<h2 class="title">Nuova attivit&agrave</h2>
+<p class="meta"></p>
+<div class="entry">
+<% form_tag :action => "create" do %>
+ <h4>Casa</h4>
+ <%= select("selected_house", "id", @houses.map {|u| [u.name, u.id]}) %>
+ <br/>
+ <h4><%= label_tag "Nome attività" %></h4>
+ <%= text_field_tag :name %>
+ <br>
+ <h4><%= label_tag "Descrizione" %></h4>    
+ <%= text_area_tag :description, nil, :size => "70x10" %>
+ <br/>
+ <h4><%= label_tag "Costo" %></h4>  
+ <%= text_field_tag :cost %>
+ <br/>
+ <h4><%= label_tag "Durata" %></h4>  
+ <%= text_field_tag :duration %> in ore di lavoro
+ <br/>
+ <h4><%= label_tag "Scadenza" %></h4>
+ <%= date_select("date_expiration","expiration") %>
+ <br/>	<br/> <br/>
+  <%= submit_tag 'Crea' %>
+<% end %>
+<br/>
+<%= link_to 'Indietro', activities_path %>
+
+</div>
+<br>

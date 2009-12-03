@@ -1,0 +1,22 @@
+<h2 class="title">Benvenuto in ¿ChiPaga?</h2>
+<p class="meta">Sistema di gestione delle spese domestiche</p>
+<div class="entry">
+  <p><strong>¿ChiPaga?</strong> &egrave; un'applicazione web completamente gratuita che consente di gestire le attivit&agrave;
+    e le spese domestiche in modo ordinato e centralizzato.<br/>
+    Gli utenti registrati possono gestire un numero illimitato di case. Gli inquilini possono inserire i propri dati in una casa
+    gi&agrave; presente nel sistema, monitorare le spese altrui e tracciare le proprie.</p>
+  <br>
+  <br>
+  <div>
+    <% if current_user.nil? == false %>
+      <h4 class="links"><%= link_to 'Profilo personale', current_user.account  %></h4>
+    <% end %>
+    <h4 class="links"><%= link_to 'Attivit&agrave', :controller => 'activities', :action =>'index' %></h4>
+    <h4 class="comments"><%= link_to 'Informazioni', :controller => 'home', :action => 'about' %></h4>
+  </div>
+  <br><br><br>
+  <p>
+    Il sito è sviluppato in <%= link_to "RubyOnRails", "http://www.rubyonrails.org/"%> ed è ospitato su  <%= link_to "Heroku", "http://www.heroku.com/"%>
+  </p>
+
+</div>

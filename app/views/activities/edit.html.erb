@@ -1,0 +1,41 @@
+<h2 class="title">Modifica attivit&agrave</h2>
+<p class="meta">Modifica di un'attitivit&agrave;</p>
+
+<div class="entry">
+
+<% form_for(@activity) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label 'Nome'%><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label 'Descrizione' %><br />
+    <%= f.text_area :description %>
+  </p>
+  <p>
+    <%= f.label 'Costo' %><br />
+    <%= f.text_field :cost, :size =>"5" %>
+  </p>
+  <p>
+    <%= f.label 'Data di scadenza' %><br />
+    <%= f.date_select :expiration %>
+  </p>
+  <p>
+    <%= f.label 'Durata'%><br />
+    <%= f.text_field :duration, :size =>"5"%> in ore di lavoro
+  </p>
+  <p>
+    <%= f.label "Stato attività" %><br />
+    <strong>Concludi <%= f.check_box :done %></strong> 
+  </p>
+  <p>
+    <%= f.submit 'Aggiorna' %>
+  </p>
+<% end %>
+
+<%= link_to 'Modifica', @activity %> |
+<%= link_to 'Indietro', activities_path %>
+
+</div>

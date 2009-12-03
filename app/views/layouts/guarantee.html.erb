@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>chipaga: <%= controller.action_name %></title>
+  <%= stylesheet_link_tag 'guarantee' %>
+</head>
+<body>
+	<div id="logo">
+		<h1><%= link_to '¿ChiPaga?', home_path %></h1>
+		<p><em> sistema di gestione delle spese domestiche per umani</em></p>
+	</div>
+	<hr />
+	<!-- end #logo -->
+	<div id="header">
+		<div id="menu">
+			<ul>
+				<% if @page == 'index' %>
+					<li class="current_page_item">
+				<% else%>
+					<li>
+				<% end %>
+			
+				<%= link_to 'Home',:controller => 'home',  :action => 'index'%>
+				</li>
+				
+				<% if @page == 'about' %>
+					<li class="current_page_item">
+				<% else%>
+					<li>
+				<% end %>
+				
+				<%= link_to 'Informazioni', :controller => 'home', :action => 'about'%>
+				</li>
+				
+				<% if @page == 'contacts' %>
+					<li class="current_page_item">
+				<% else%>
+					<li>
+				<% end %>
+				
+				<%= link_to 'Contatti', :controller => 'home', :action => 'contacts'%>
+				</li>
+				
+				<% if @page == 'activities' %>
+					<li class="current_page_item">
+				<% else%>
+					<li>
+				<% end %>
+				
+				<%= link_to 'Attività', :controller => 'activities', :action => 'index'%>
+				</li>
+			</ul>
+		</div>
+		<!-- end #menu -->
+		<div id="search">
+                        <form action="http://www.google.it/cse" id="cse-search-box" target="_blank">
+                          <fieldset>
+				<input type="hidden" name="cx" value="partner-pub-9863680382039383:c95xxwy14sp" />
+				<input type="hidden" name="ie" value="ISO-8859-1" />
+				<input type="text" name="q" size="31" id="search-text"/>
+                                <input type="submit" name="sa" value="GO" id="search-submit" />
+                          </fieldset>
+			</form>
+			<script type="text/javascript" src="http://www.google.it/cse/brand?form=cse-search-box&amp;lang=it"></script>
+		</div>
+		<!-- end #search -->
+	</div>
+	<!-- end #header -->
+	<!-- end #header-wrapper -->
+        <div id="page">
+	        <div id="notice"><%= flash[:notice] %></div>
+	<div id="content">
+         <div class="post">
+             <%= yield %>
+          </div>
+	</div><!-- end #content -->
+	<div id="sidebar">
+          <ul>
+            <li>
+            <h2>Autenticazione</h2>
+		<ul>
+		<% if logged_in? %>
+                   <h4><i> Ciao <%=h current_user.login %></i></h4>
+                   <li>
+                     <b>
+                       <%= link_to " Profilo ", current_user.account %> | <%= link_to ' Logout ', logout_path %>
+                       <% if admin? %>
+                        | <%= link_to " Utenti ", :controller => 'users' %> | <%= link_to " Accounts ", :controller => 'accounts' %>
+                       <% end %>									
+                      </b>
+                    </li>
+		      <% else %>
+			<h4><i> Non sei loggato. </i></h4>
+			<li><b><%= link_to 'Autenticati', login_path %></b> </li>
+                        <li><b><%= link_to 'Registrati ', signup_path %></b></li>
+		      <% end %>
+		</ul>
+            </li>
+            <li>
+              <h2>Attivit&agrave in corso</h2>
+              <ul>
+                <li><%= link_to 'Pagamento affitto', :controller => 'activities', :action =>'index'%></li>
+                <li><%= link_to 'Preparazione evento', :controller => 'activities', :action =>'index'%></li>
+                <li><%= link_to 'Manutenzione casa', :controller => 'activities', :action =>'index'%></li>
+              </ul>
+            </li>
+            <li>
+              <h2>Gestione casa </h2>
+		<ul>
+              <li><%= link_to 'Pagamenti', :controller => 'houses', :action =>'index'%></li>
+              <li><%= link_to 'Spese', :controller => 'houses', :action =>'index'%></li>
+              <li><%= link_to 'Manutenzione', :controller => 'houses', :action =>'index'%></li>
+              <li><%= link_to 'Divertimenti', :controller => 'houses', :action =>'index'%></li>
+              
+        	</ul>
+            </li>	
+	</ul>
+	</div>
+		<!-- end #sidebar -->
+	<div style="clear: both;">&nbsp;</div>
+	</div>
+	<!-- end #page -->
+	<div id="footer">
+		<p>Copyright (c) 2009 chipaga.heroku.com. All rights reserved. Design by <a href="http://www.freecsstemplates.org/">Free CSS Templates</a>.</p>
+	</div>
+	<!-- end #footer -->
+</body>
+</html>
+

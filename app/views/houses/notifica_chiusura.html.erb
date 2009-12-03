@@ -1,0 +1,22 @@
+<h2 class="title">Comunicazione di chiusura spese mensili</h2>
+<p class="meta">Pagina per l'invio delle notifiche di pagamento per fine spese mensili</p>
+<div class="entry">
+<h2>Dare/Avere</h2>
+  <p>La spesa totale del mese <%= Date.today.month %>/<%= Date.today.year %> &egrave; stata di <%=  @spesa_tot %> &euro;
+  <h3>Saldo inquilini</h3>
+  <ul>
+    <%  @inquilini.each do |inq| %>
+      <li><strong><%= inq.login %></strong> ha speso <%= @inquilini_spesa[inq].to_s %> &euro;. Il suo saldo mensile è <strong><%=  (@inquilini_spesa[inq] - (@spesa_tot / @inquilini.length)).round(2) %> &euro;</strong></li>
+    <% end %>
+  </ul>
+
+  <h2>Aggiungi note </h2>
+  <% form_tag :action => "invia_notifica", :id => @house.id do %>
+
+  <%= text_area_tag :body, nil, :size => "70x10" %>
+  <br/>
+  <br/>
+  <%= submit_tag 'Invia notifica' %>
+  </p>
+  <% end %>
+</div>

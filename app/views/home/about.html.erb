@@ -1,0 +1,19 @@
+<h2 class="title">Informazioni </h2>
+<p class="meta">Informazioni sul funzionamento dell'applicazione</p>
+<div class="entry">
+  <p>Per poter utilizzare l'applicazione &egrave; necessario  <%= link_to "registrarsi", "/signup"%>. Una volta loggati, si potr&agrave;
+    creare una nuova casa o partecipare ad una gi&agrave; esistente.<br>
+    Sar&agrave; sufficiente inserire le attivit&agrave; e le spese che si affrontano. Ogni qualvolta si vorr&agrave; comunicare agli altri
+    inquilini i particolari su debiti/crediti, sui saldi dei singoli partecipanti alla vita della casa, sar&agrave; sufficiente
+    cliccare un tasto nella propria pagina personale. <br>
+    Il sistema provveder&agrave; a calcolare e comunicare via email i valori di crediti e debiti tra i coinquilini. Tutto in
+    modo semplice e preciso.
+  </p>
+
+  <div>
+    <% if current_user.nil? == false %>
+      <h4 class="links"><%= link_to 'Profilo personale', current_user.account  %></h4>
+    <% end %>
+    <h4 class="links"><%= link_to 'Attivit&agrave', :controller => 'activities', :action =>'index' %></h4>
+  </div>
+</div>

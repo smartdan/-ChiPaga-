@@ -1,0 +1,106 @@
+<h2 class="title">Profilo personale di <%=h @account.user.login %></h2>
+<p class="meta">Dettagli utente</p>
+<div class="entry">
+	<table CELLPADDING="5" BGCOLOR = "whitesmoke" align="center" width="100%">
+		<tr>
+			<td valign = 'baseline'>  
+				<h2>Dati personali</h2>
+			</td>
+			<td valign = 'baseline'>
+				<h2>Cerca la tua casa</h2>
+			</td>
+		</tr>
+		<tr>
+			<td valign = 'baseline'>  
+				<p>
+					<b>Nome:</b> <%=h @account.name %> | <b>Cognome:</b> <%=h @account.surname %>
+				</p>
+				<p>
+					<!--<b>Saldo:</b> <%=h @account.money %> &euro; | -->
+					<b>Note:</b> <%=h @account.notes %>
+				</p>
+			</td>
+			<td valign = 'baseline'>  
+				<br>
+				<% form_tag :controller=>'houses', :action => 'cerca_casa' do  %>
+				<%= text_field_tag :nome_casa, 'Inserisci il nome' %>
+				<%= submit_tag 'Cerca' %>
+				<% end %>
+			</td>
+		</tr>
+	</table>
+		<br/>
+		<h2>Saldo dare/avere ultimi 30 giorni</h2>
+		<p>
+			Questo mese hai speso <strong><%= @spesa_personale.round(2) %> &euro;</strong>.
+			Il tuo saldo mensile attualmente &egrave; <strong><%= @spesa_personale.round(2) - @spesa_case.round(2) %> &euro;</strong>.
+		</p>
+		<table  CELLPADDING="5" BGCOLOR = "whitesmoke" align="center" width="100%">
+			<tr>
+				<td valign = 'baseline'>
+					<h2>Le mie case</h2>
+					<br/>
+					Lista delle case in cui vivo
+					<ul>
+						<br/>
+						<% @houses.each do |house| %>
+						<li>
+							<%= link_to house.name, house %> di <%= house.place %><br>
+							<h3>Spese ultimo mese</h3>
+							<ul>
+								<% if house.activities.length > 0 %>
+								<% house.activities.each do |act| %>
+								<% if act.created_at >= 1.month.ago and act.done == 0 %>
+								<li><strong><%= link_to  act.name, act %></strong>: <%= act.cost.round(2) %> &euro;  da <%= act.user.login %>   </li>
+								<% end %>
+								<% end %>
+								<% else %>
+								<li>Nessuna spesa inserita</li>
+								<% end %>
+							</ul>
+						</li>
+						<% end %>
+					</ul>
+
+				</td>
+				<td valign = 'baseline'>
+					<h2>Le mie spese </h2>
+					<br/>
+					Lista delle spese effettuate da me negli ultimi 30 giorni.<br/>
+					<ul>
+						<br/>
+						<% if @account.user.activities.length > 0 %>
+						<% @account.user.activities.each do |acts| %>
+						<% if acts.created_at > 1.month.ago and acts.done == 0 %>
+						<li><strong><%= link_to acts.name, acts %></strong> di <%= acts.cost.round(2) %> &euro; </li>
+						<% end %>
+						<% end %>
+						<% else %>
+						<li>Nessuna spesa inserita</li>
+						<% end %>
+					</ul>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<h4><%= link_to 'Aggiungi casa', :controller => 'houses', :action =>'new'%></h4>
+				</td>
+				<td>
+					<% if @houses.length > 0 %>
+					<h4><%= link_to 'Aggiungi attività', :controller => 'activities', :action =>'new'%></h4>
+					<% end %>
+				</td>
+			</tr>
+		</table>
+		<br/>
+		<% if admin? %>
+		<h2>Gestione applicazione</h2>
+		<br>
+		<% if (@maintenance == 1)  %>
+		<%= link_to "Avvia applicazione", :action => 'start_app' , :id => @account %>
+		<% else %>
+		<%= link_to "Ferma applicazione", :action => 'stop_app' , :id => @account %>
+		<% end %>
+		<% end %>
+	</div>

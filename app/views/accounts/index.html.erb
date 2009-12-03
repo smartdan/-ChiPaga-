@@ -1,0 +1,29 @@
+<h2 class="title">Lista utenti </h2>
+<p class="meta">lista degli utenti del sistema</p>
+<div class="entry">
+
+   <table CELLPADDING="5" BGCOLOR = "whitesmoke">
+  <tr>
+    <td valign = 'baseline'><h3>Login</h3></td>
+    <td valign = 'baseline' align = 'center'><h3>Nome</h3></td>
+    <td valign = 'baseline'><h3>Cognome</h3></td>
+    <td valign = 'baseline'><h3>Saldo</h3></td>
+    <td valign = 'baseline'><h3>Note</h3></td>
+  </tr>
+
+  <% @accounts.each do |account| %>
+  <tr>
+    <td><%=h account.user.login %></td>
+    <td><%=h account.name %></td>
+    <td><%=h account.surname %></td>
+    <td><%=h account.money %></td>
+    <td><%=h account.notes %></td>
+    <td><%= link_to 'Mostra', account %></td>
+    <td><%= link_to 'Modifica', edit_account_path(account) %></td>
+   <td><%= link_to 'Elimina', account, :confirm => 'Sei sicuro?', :method => :delete %></td>
+  </tr>
+  <% end %>
+</table>
+
+<br />
+</div>

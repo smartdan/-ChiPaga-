@@ -1,0 +1,35 @@
+<h2 class="title">Lista delle attivit&agrave</h2>
+<p class="meta">Visualizza la lista delle attitivit&agrave; di <%=  current_user.login %></p>
+
+<div class="entry">
+
+  <table CELLPADDING="5" BGCOLOR = "whitesmoke">
+  <tr>
+    <td valign = 'baseline'><h3>Nome</h3></td>
+    <td valign = 'baseline' align = 'center'><h3>Descrizione</h3></td>
+    <td valign = 'baseline'><h3>Costo</h3></td>
+    <td valign = 'baseline'><h3>Data fine attivit&agrave</h3></td>
+    <td valign = 'baseline'><h3>Durata</h3></td>
+  </tr>
+
+<% @activities.each do |act| %>
+  <tr>
+    <td><%=h act.name %></td>
+    <td><%=h act.description %></td>
+    <td><%=h act.cost.round(2) %></td>
+    <td><%=h act.expiration.to_s %></td>
+    <td><%=h act.duration %></td>
+    <td><%= link_to 'Visualizza dettagli', act %></td>
+	<td><%= link_to 'Concludi attivit&agrave;', :action => 'concludi', :id => act %></td>
+    <td> | </td>
+	<td><%= link_to 'Modifica', edit_activity_path(act) %></td>
+    <td><%= link_to 'Elimina', act, :confirm => 'Sei sicuro?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<br />
+<br />
+
+<%= link_to 'Nuova attività', new_activity_path %> | <%= link_to 'Visualizza il mio profilo', current_user.account %>
+
+</div>

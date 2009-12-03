@@ -1,0 +1,35 @@
+<h2 class="title">Modifica  <%=h @account.user.login %></h2>
+<p class="meta">Modifica dettagli utente</p>
+<div class="entry">
+
+<% form_for(@account) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :user %><br />
+    <%= f.text_field :user %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :surname %><br />
+    <%= f.text_area :surname %>
+  </p>
+  <p>
+    <%= f.label :money %><br />
+    <%= f.text_field :money %>
+  </p>
+  <p>
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>
+  </p>
+  <p>
+    <%= f.submit 'Aggiorna' %>
+  </p>
+<% end %>
+</div>
+
+<%= link_to 'Modifica', @account %> |
+<%= link_to 'Indietro', accounts_path %>
